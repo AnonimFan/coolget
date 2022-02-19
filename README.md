@@ -4,7 +4,7 @@ wget clone (?) with libcurl
 
 <hr>
 
-### Quick start
+## Quick start
 
 ```console
 $ make
@@ -14,7 +14,7 @@ $ ./coolget https://cdn.discordapp.com/emojis/936687781613285437.webp?size=1024&
 
 <hr>
 
-### Features
+## Features
 
 - can get stuff from http, https, ftp, sftp(?), and more
 
