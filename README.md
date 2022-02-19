@@ -9,7 +9,7 @@ wget clone (?) with libcurl
 ```console
 $ make
 
-$ ./coolget https://cdn.discordapp.com/emojis/936687781613285437.webp?size=1024&quality=lossless tsodinFlushed.png
+$ ./coolget "https://cdn.discordapp.com/emojis/936687781613285437.webp?size=1024&quality=lossless" tsodinFlushed.png
 ```
 
 <hr>
