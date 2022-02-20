@@ -12,6 +12,8 @@ $ make
 $ ./coolget "https://cdn.discordapp.com/emojis/936687781613285437.webp?size=1024&quality=lossless" tsodinFlushed.png
 ```
 
+it will work ![zozek](tsodinPogging.gif)
+
 <hr>
 
 ## Features
