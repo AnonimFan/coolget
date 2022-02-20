@@ -1,6 +1,6 @@
 OUTPUT = coolget
-FILES_SRC = $(wildcard **.c)
-FILES_OBJ = $(wildcard **.o)
+FILES_SRC = coolget.c
+FILES_OBJ = coolget.o
 CFLAGS = -Wall -Wextra -pedantic -std=c11 -I/usr/include -ggdb
 LDFLAGS = -L/usr/lib -lcurl
 CC = cc -c $(CFLAGS) $(FILES_SRC)
