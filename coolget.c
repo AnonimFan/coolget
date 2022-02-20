@@ -4,6 +4,14 @@
 #include <string.h>
 #include <signal.h>
 
+void help(FILE *stream)
+{
+    fprintf(stream, "coolget help: \n");
+    fprintf(stream, "    <url>: can be ftp, sftp, http, https, telnet\n");
+    fprintf(stream, "    <file>: shall have the requested files file extension\n");
+    exit(1);
+}
+
 void interrupt(int num)
 {
     signal(SIGINT, interrupt);
@@ -26,7 +34,6 @@ int fix_fopen_failure(const char *path)
     #elif _WIN32
     sprintf(shit, "del %s", path);
     #endif
-
     system(shit);
     return 0;
 }
@@ -86,6 +93,8 @@ void get_file(const char *url, const char *path)
     fclose(file);
 }
 
+
+
 int main(int argc, char *argv[])
 {
     signal(SIGINT, interrupt);
@@ -95,6 +104,10 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    if (argc == 2 && !strcmp(argv[1], "--help")) {
+        help(stderr);
+    }
+
     if (argc == 2) {
         fprintf(stderr, "[ERROR]: no output file is provided\n");
         fprintf(stderr, "[USAGE]: %s %s <output file>", argv[0], argv[1]);
@@ -102,17 +115,19 @@ int main(int argc, char *argv[])
     }
 
     if (argc == 3) {
-        //if (strstr(argv[1], "http")) {
-        //        fprintf(stderr, "[ERROR]: specified URL is not an internet link\n");
-//                return 1;
-//           }
+        if (strstr(argv[1], "https://") == NULL && strstr(argv[1], "http://") == NULL
+            && strstr(argv[1], "sftp://") == NULL && strstr(argv[1], "ftp://") == NULL
+            && strstr(argv[1], "telnet://") == NULL) {
+            eputs("specified URL does not contain an internet protocol");
+            return 1;
+        }
         fprintf(stdout, "[INFO]: downloading file %s from %s\n", argv[2], argv[1]);
         clock_t start, end;
         start = clock();
         get_file(argv[1], argv[2]);
         end = clock() - start;
         double time_took = ((double) (end)) / CLOCKS_PER_SEC;
-        fprintf(stdout, "[INFO]: downloaded file %s from\n", argv[2]);
+        fprintf(stdout, "[INFO]: downloaded file %s\n", argv[2]);
         fprintf(stdout, "[PROFILE]: downloading took %f seconds\n", time_took);
     }
 
